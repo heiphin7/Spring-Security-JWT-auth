@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -72,19 +73,7 @@ public class UserService implements UserDetailsService {
     }
 
     public void createNewUser(User user){
-        /*
-        * Делаем простую проверку пользователя
-        * Условия для создания:
-        * Username должен содержать 8 или более символов
-        * Password просто не должен быть пустым и должен быть больше 8 символов даже если это хэш
-        * Roles (роли пользователя) не должен быть пустым и не должен ссылаться на null
-        */
-        if(user.getUsername().length() < 8 || user.getPassword().length() < 8
-                ||user.getRoles() == null || !user.getRoles().isEmpty()){
-            throw new IllegalArgumentException("Неверные данные пользователя");
-        }else {
-            // Если все норм, тогда просто сохраняем, используя метод репозитория
-            userRepository.save(user);
-        }
+        user.setRoles(List.of(roleRepository.findByName("ROLE_USER").get()));
+        userRepository.save(user);
     }
 }

@@ -2,13 +2,22 @@
 
 # Project architecture
 
+Логика получения токена (после входа в аккаунт):
+
 ![Image alt](https://github.com/heiphin7/Spring-Security-JWT-Auth/blob/main/img/project%20architecture.png)
+
+Логика создания нового пользователя: 
+
+![Image alt](https://github.com/heiphin7/Spring-Security-JWT-Auth/blob/main/img/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202024-03-10%20205039.png)
+
 
 # Коротко о API
 
-Данный проект - простое REST - приложение, которые выполняет функцию входа в аккаунт, а также аутентификации пользователя и генерирует JWT токен для пользователя, успешно прошедшего аутентификацию.
-Использовал:
-Spring boot, Spring security, postgresql, postman(тестирование api), jjwt (для jwt), lombok
+Данный проект - простое REST - приложение, которые выполняет функцию входа в аккаунт, создание аккаунта(регистрация) а также аутентификации пользователя и генерация JWT токен для пользователя, успешно прошедшего аутентификацию. Проект имеет достаточно хорошую безопастность, потому что использует Spring security и хэширование паролей и использование токенов, таких как JWT. Но в проекте не реализована логика использования 
+самого JWT. 
+
+Было использовано:
+Spring boot, Spring security, Hibernate ,postgresql, postman(тестирование api), jjwt (для jwt), lombok
 
 # Из чего состоит JWT токен:
 
@@ -18,8 +27,11 @@ Spring boot, Spring security, postgresql, postman(тестирование api),
 # Логика программы & Генерация JSON Web Token
 
 Так как это API, то это значит что сервис не имеент интерфейса, а лишь обрабатывает HTTP - запросы. Здесь, API принимает только GET - запрос по 
-URL /auth, в который пользователь должен ввести свой username и password. Далее, эти данные обрабатываются AuthController, а точнее его методом
-AuthenticationManager.autenticate(username, password) - как это описано в коде. AuthenticationManager - Бин, который мы описали в SecurityConfig.
+URL /auth и /reg, в который пользователь должен ввести свой username и password для авторизации и username, password, email для регистрации. 
+Далее, эти данные обрабатываются AuthController и RegistrationController.
+
+Для аутентификации мы используем метод от самого Spring security, а точнее authenticate. А для регистрации нового пользователя, мы используем метод 
+save нашего UserRepository.
 
 Итак, мы примерно понимаем как мы аутентифицируем пользователя, и после успешной аутентификации, мы должны сгенерировать для него JWT токен, и вот как это
 происходит:
@@ -31,6 +43,8 @@ AuthenticationManager.autenticate(username, password) - как это описа
 
 # Тестирование и Демонстрация API
 
+Далее идут демонстрации Авторизации и создания нового пользователя
+
 Случай успешного прохождения аутентификации:
 
 ![Image alt](https://github.com/heiphin7/Spring-Security-JWT-Auth/blob/main/img/GetToken.png)
@@ -39,3 +53,25 @@ AuthenticationManager.autenticate(username, password) - как это описа
 Случай, когда данные неверные:
 
 ![Image alt](https://github.com/heiphin7/Spring-Security-JWT-Auth/blob/main/img/ErrorMessage.png)
+
+
+# Регистрация нового пользователя
+
+Успешное создание нового пользователя
+
+![Image alt](https://github.com/heiphin7/Spring-Security-JWT-Auth/blob/main/img/SuccessRegistration.png)
+
+
+Случай, когда юзер пытается зарегистрировать пользователя с занятым именем
+
+![Image alt](https://github.com/heiphin7/Spring-Security-JWT-Auth/blob/main/img/usernameIsTakenExcep.png)
+
+
+Когда не совпадают пароль и подтверждение
+
+![Image alt](https://github.com/heiphin7/Spring-Security-JWT-Auth/blob/main/img/WrongPasswordException.png)
+
+
+Пользователь пытается отпавить пустой пароль
+
+![Image alt](https://github.com/heiphin7/Spring-Security-JWT-Auth/blob/main/img/EmptyPasswordException.png)

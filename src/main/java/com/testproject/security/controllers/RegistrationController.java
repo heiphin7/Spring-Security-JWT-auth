@@ -29,9 +29,9 @@ public class RegistrationController {
     @PostMapping("/reg")
     public ResponseEntity<?> registration(@RequestBody RegistrationUserDto regUser) {
         if (!regUser.getPassword().equals(regUser.getConfirmPassword())) {
-            return new ResponseEntity<>(new AppErorr(HttpStatus.CONFLICT.value(), "Пароли не совпадают"), HttpStatus.CONFLICT);
+            return new ResponseEntity<>(new AppErorr(HttpStatus.BAD_REQUEST.value(), "Пароли не совпадают"), HttpStatus.BAD_REQUEST);
         } else if (regUser.getPassword() == null || regUser.getPassword().isEmpty()) {
-            return new ResponseEntity<>(new AppErorr(HttpStatus.CONFLICT.value(), "Пароль не должен быть пустым"), HttpStatus.CONFLICT);
+            return new ResponseEntity<>(new AppErorr(HttpStatus.BAD_REQUEST.value(), "Пароль не должен быть пустым"), HttpStatus.BAD_REQUEST);
         }else{
             Optional<User> user = userService.findByUsername(regUser.getUsername());
 

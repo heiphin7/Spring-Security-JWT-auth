@@ -21,7 +21,7 @@ public class MainController {
     }
     @GetMapping("/admin")
     public String adminData() {
-        return "unsecured Data";
+        return "Admin Data";
     }
     @GetMapping("/info")
     public String userData(Principal principal){

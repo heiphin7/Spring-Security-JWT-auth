@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +25,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class RegistrationController {
     private final UserService userService;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @PostMapping("/reg")
     public ResponseEntity<?> registration(@RequestBody RegistrationUserDto regUser) {
@@ -40,7 +41,7 @@ public class RegistrationController {
             }
         }
 
-        String encodedPassword = bCryptPasswordEncoder.encode(regUser.getPassword());
+        String encodedPassword = passwordEncoder.encode(regUser.getPassword());
         User registrationUser = new User();
         registrationUser.setUsername(regUser.getUsername());
         registrationUser.setPassword(encodedPassword);

@@ -5,6 +5,7 @@ import com.testproject.security.dtos.RegistrationUserDto;
 import com.testproject.security.entity.Role;
 import com.testproject.security.entity.User;
 import com.testproject.security.exceptions.AppErorr;
+import com.testproject.security.mapper.UserMapper;
 import com.testproject.security.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -24,14 +25,14 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 public class RegistrationController {
+
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
+    private final UserMapper mapper;
 
     @PostMapping("/reg")
     public ResponseEntity<?> registration(@RequestBody RegistrationUserDto regUser) {
         // Проверка всех полей
-        if (
-                regUser.getUsername() == null || regUser.getEmail() == null ||
+        if (regUser.getUsername() == null || regUser.getEmail() == null ||
                         regUser.getPassword() == null || regUser.getConfirmPassword() == null
         ) {
             return new ResponseEntity<>(new AppErorr(HttpStatus.BAD_REQUEST.value(), "Все поля должны быть заполнены!"), HttpStatus.BAD_REQUEST);
@@ -49,11 +50,8 @@ public class RegistrationController {
             }
         }
 
-        String encodedPassword = passwordEncoder.encode(regUser.getPassword());
-        User registrationUser = new User();
-        registrationUser.setUsername(regUser.getUsername());
-        registrationUser.setPassword(encodedPassword);
-        registrationUser.setEmail(regUser.getEmail());
+        // using mapper
+        User registrationUser = mapper.RegDtoToUser(regUser);
 
         userService.createNewUser(registrationUser);
         return ResponseEntity.ok("Успешная регистрация");

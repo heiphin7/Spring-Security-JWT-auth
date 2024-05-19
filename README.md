@@ -1,6 +1,6 @@
 # Spring-Security-JWT-Auth
 
-# Project architecture
+# Project design
 
 Логика получения токена (после входа в аккаунт):
 
@@ -43,35 +43,33 @@ save нашего UserRepository.
 
 # Тестирование и Демонстрация API
 
-Далее идут демонстрации Авторизации и создания нового пользователя
+registration-controller
 
-Случай успешного прохождения аутентификации:
+POST
+/reg
 
-![Image alt](https://github.com/heiphin7/Spring-Security-JWT-Auth/blob/main/img/GetToken.png)
+auth-controller
+
+POST
+/auth
+
+main-controller
+
+GET
+/users/{id}
+
+GET
+/unsecured
+
+GET
+/secured
+
+GET
+/info
+
+GET
+/admin
+
+Все данные endpoint-ы можете просмотреть в swagger ui при локальном запуске: localhost:{port}/swagger-ui/index.html
 
 
-Случай, когда данные неверные:
-
-![Image alt](https://github.com/heiphin7/Spring-Security-JWT-Auth/blob/main/img/ErrorMessage.png)
-
-
-# Регистрация нового пользователя
-
-Успешное создание нового пользователя
-
-![Image alt](https://github.com/heiphin7/Spring-Security-JWT-Auth/blob/main/img/SuccessRegistration.png)
-
-
-Случай, когда юзер пытается зарегистрировать пользователя с занятым именем
-
-![Image alt](https://github.com/heiphin7/Spring-Security-JWT-Auth/blob/main/img/usernameIsTakenExcep.png)
-
-
-Когда не совпадают пароль и подтверждение
-
-![Image alt](https://github.com/heiphin7/Spring-Security-JWT-Auth/blob/main/img/WrongPasswordException.png)
-
-
-Пользователь пытается отпавить пустой пароль
-
-![Image alt](https://github.com/heiphin7/Spring-Security-JWT-Auth/blob/main/img/EmptyPasswordException.png)

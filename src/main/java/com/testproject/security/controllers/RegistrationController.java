@@ -29,6 +29,14 @@ public class RegistrationController {
 
     @PostMapping("/reg")
     public ResponseEntity<?> registration(@RequestBody RegistrationUserDto regUser) {
+        // Проверка всех полей
+        if (
+                regUser.getUsername() == null || regUser.getEmail() == null ||
+                        regUser.getPassword() == null || regUser.getConfirmPassword() == null
+        ) {
+            return new ResponseEntity<>(new AppErorr(HttpStatus.BAD_REQUEST.value(), "Все поля должны быть заполнены!"), HttpStatus.BAD_REQUEST);
+        }
+
         if (!regUser.getPassword().equals(regUser.getConfirmPassword())) {
             return new ResponseEntity<>(new AppErorr(HttpStatus.BAD_REQUEST.value(), "Пароли не совпадают"), HttpStatus.BAD_REQUEST);
         } else if (regUser.getPassword() == null || regUser.getPassword().isEmpty()) {

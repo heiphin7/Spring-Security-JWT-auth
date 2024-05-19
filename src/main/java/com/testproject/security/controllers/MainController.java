@@ -3,6 +3,7 @@ package com.testproject.security.controllers;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
@@ -28,4 +29,8 @@ public class MainController {
         return principal.getName();
     }
 
+    @GetMapping("/users/{id}")
+    public String getInfoById(@RequestParam Long id){
+        return "Current id = " + id;
+    }
 }

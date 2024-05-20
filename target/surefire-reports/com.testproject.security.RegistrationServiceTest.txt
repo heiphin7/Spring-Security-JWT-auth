@@ -1,0 +1,14 @@
+-------------------------------------------------------------------------------
+Test set: com.testproject.security.RegistrationServiceTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 5.594 s <<< FAILURE! -- in com.testproject.security.RegistrationServiceTest
+com.testproject.security.RegistrationServiceTest.successRegistrationTest -- Time elapsed: 0.042 s <<< ERROR!
+java.util.NoSuchElementException: No value present
+	at java.base/java.util.Optional.get(Optional.java:143)
+	at com.testproject.security.service.UserService.createNewUser(UserService.java:76)
+	at com.testproject.security.controllers.RegistrationController.registration(RegistrationController.java:56)
+	at com.testproject.security.RegistrationServiceTest.successRegistrationTest(RegistrationServiceTest.java:74)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+

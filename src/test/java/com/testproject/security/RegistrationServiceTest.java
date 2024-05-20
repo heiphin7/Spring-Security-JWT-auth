@@ -3,12 +3,14 @@ package com.testproject.security;
 import com.testproject.security.controllers.RegistrationController;
 import com.testproject.security.dtos.RegistrationUserDto;
 import com.testproject.security.exceptions.AppErorr;
+import com.testproject.security.mapper.UserMapper;
 import com.testproject.security.repository.RoleRepository;
 import com.testproject.security.repository.UserRepository;
 import com.testproject.security.service.UserService;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,7 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class RegistrationServiceTest {
     private static RegistrationController registrationController;
     private static UserService userService;
-    private static PasswordEncoder passwordEncoder;
+    private static UserMapper userMapper;
     private static UserRepository userRepository;
     private static RoleRepository roleRepository;
 
@@ -30,6 +32,11 @@ public class RegistrationServiceTest {
     // For init services & users for testing
     @BeforeAll
     public static void init() {
+
+        userRepository = Mockito.mock(UserRepository.class);
+        userMapper = Mockito.mock(UserMapper.class);
+        roleRepository = Mockito.mock(RoleRepository.class);
+
         // init users
         userWithDiffPassword = new RegistrationUserDto(
                 "testUser1", "password1", "password2", "testUser@gmail.com"
@@ -43,15 +50,13 @@ public class RegistrationServiceTest {
                 null, null, null, null
         );
 
-
         // Init modules
-
         userService = new UserService(
                 userRepository, roleRepository
         );
 
         registrationController = new RegistrationController(
-                userService, passwordEncoder
+                userService, userMapper
         );
     }
 

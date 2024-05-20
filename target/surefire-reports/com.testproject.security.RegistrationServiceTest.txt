@@ -1,43 +1,12 @@
 -------------------------------------------------------------------------------
 Test set: com.testproject.security.RegistrationServiceTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 5.264 s <<< FAILURE! -- in com.testproject.security.RegistrationServiceTest
-com.testproject.security.RegistrationServiceTest.successRegistrationTest -- Time elapsed: 0.052 s <<< ERROR!
-java.lang.NullPointerException
-	at java.base/java.util.Objects.requireNonNull(Objects.java:233)
-	at java.base/java.util.Optional.of(Optional.java:113)
-	at com.testproject.security.RegistrationServiceTest.successRegistrationTest(RegistrationServiceTest.java:80)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-
-com.testproject.security.RegistrationServiceTest.passwordsNotMatches -- Time elapsed: 0.010 s <<< ERROR!
-org.mockito.exceptions.misusing.UnfinishedStubbingException: 
-
-Unfinished stubbing detected here:
--> at com.testproject.security.RegistrationServiceTest.successRegistrationTest(RegistrationServiceTest.java:80)
-
-E.g. thenReturn() may be missing.
-Examples of correct stubbing:
-    when(mock.isOk()).thenReturn(true);
-    when(mock.isOk()).thenThrow(exception);
-    doThrow(exception).when(mock).someVoidMethod();
-Hints:
- 1. missing thenReturn()
- 2. you are trying to stub a final method, which is not supported
- 3. you are stubbing the behaviour of another mock inside before 'thenReturn' instruction is completed
-
-	at com.testproject.security.service.UserService.findByUsername(UserService.java:32)
-	at com.testproject.security.RegistrationServiceTest.passwordsNotMatches(RegistrationServiceTest.java:68)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-
-com.testproject.security.RegistrationServiceTest.emptyUserTest -- Time elapsed: 0.003 s <<< ERROR!
-java.lang.NullPointerException
-	at java.base/java.util.Objects.requireNonNull(Objects.java:233)
-	at java.base/java.util.Optional.of(Optional.java:113)
-	at com.testproject.security.RegistrationServiceTest.emptyUserTest(RegistrationServiceTest.java:94)
+Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 5.275 s <<< FAILURE! -- in com.testproject.security.RegistrationServiceTest
+com.testproject.security.RegistrationServiceTest.successRegistrationTest -- Time elapsed: 0.711 s <<< FAILURE!
+org.junit.ComparisonFailure: expected:<[Успешная регистрация]> but was:<[<400 BAD_REQUEST Bad Request,AppErorr(status=400, message=Имя пользователя занято, timestamp=Mon May 20 16:49:34 QYZT 2024),[]>]>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at com.testproject.security.RegistrationServiceTest.successRegistrationTest(RegistrationServiceTest.java:85)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)

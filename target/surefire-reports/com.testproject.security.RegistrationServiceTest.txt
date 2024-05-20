@@ -1,13 +1,43 @@
 -------------------------------------------------------------------------------
 Test set: com.testproject.security.RegistrationServiceTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 5.594 s <<< FAILURE! -- in com.testproject.security.RegistrationServiceTest
-com.testproject.security.RegistrationServiceTest.successRegistrationTest -- Time elapsed: 0.042 s <<< ERROR!
-java.util.NoSuchElementException: No value present
-	at java.base/java.util.Optional.get(Optional.java:143)
-	at com.testproject.security.service.UserService.createNewUser(UserService.java:76)
-	at com.testproject.security.controllers.RegistrationController.registration(RegistrationController.java:56)
-	at com.testproject.security.RegistrationServiceTest.successRegistrationTest(RegistrationServiceTest.java:74)
+Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 5.264 s <<< FAILURE! -- in com.testproject.security.RegistrationServiceTest
+com.testproject.security.RegistrationServiceTest.successRegistrationTest -- Time elapsed: 0.052 s <<< ERROR!
+java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:233)
+	at java.base/java.util.Optional.of(Optional.java:113)
+	at com.testproject.security.RegistrationServiceTest.successRegistrationTest(RegistrationServiceTest.java:80)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.testproject.security.RegistrationServiceTest.passwordsNotMatches -- Time elapsed: 0.010 s <<< ERROR!
+org.mockito.exceptions.misusing.UnfinishedStubbingException: 
+
+Unfinished stubbing detected here:
+-> at com.testproject.security.RegistrationServiceTest.successRegistrationTest(RegistrationServiceTest.java:80)
+
+E.g. thenReturn() may be missing.
+Examples of correct stubbing:
+    when(mock.isOk()).thenReturn(true);
+    when(mock.isOk()).thenThrow(exception);
+    doThrow(exception).when(mock).someVoidMethod();
+Hints:
+ 1. missing thenReturn()
+ 2. you are trying to stub a final method, which is not supported
+ 3. you are stubbing the behaviour of another mock inside before 'thenReturn' instruction is completed
+
+	at com.testproject.security.service.UserService.findByUsername(UserService.java:32)
+	at com.testproject.security.RegistrationServiceTest.passwordsNotMatches(RegistrationServiceTest.java:68)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.testproject.security.RegistrationServiceTest.emptyUserTest -- Time elapsed: 0.003 s <<< ERROR!
+java.lang.NullPointerException
+	at java.base/java.util.Objects.requireNonNull(Objects.java:233)
+	at java.base/java.util.Optional.of(Optional.java:113)
+	at com.testproject.security.RegistrationServiceTest.emptyUserTest(RegistrationServiceTest.java:94)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)

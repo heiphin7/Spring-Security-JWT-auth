@@ -2,6 +2,7 @@ package com.testproject.security;
 
 import com.testproject.security.controllers.RegistrationController;
 import com.testproject.security.dtos.RegistrationUserDto;
+import com.testproject.security.entity.User;
 import com.testproject.security.exceptions.AppErorr;
 import com.testproject.security.mapper.UserMapper;
 import com.testproject.security.repository.RoleRepository;
@@ -13,7 +14,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.Optional;
 
 @SpringBootTest
 public class RegistrationServiceTest {
@@ -62,6 +64,9 @@ public class RegistrationServiceTest {
 
     @Test
     public void passwordsNotMatches() {
+        // arrange
+        Mockito.when(userService.findByUsername("testUser1")).thenReturn(Optional.of(null)); // return empty user, cause user dont exist
+
         ResponseEntity<?> response = registrationController.registration(userWithDiffPassword);
         AppErorr error = (AppErorr) response.getBody();
 
@@ -71,6 +76,9 @@ public class RegistrationServiceTest {
 
     @Test
     public void successRegistrationTest() {
+        // arrange
+        Mockito.when(userService.findByUsername("testUser1")).thenReturn(Optional.of(null)); // return empty user, cause user dont exist
+
         ResponseEntity<?> response = registrationController.registration(goodUser);
         String message = response.toString();
 
@@ -82,6 +90,9 @@ public class RegistrationServiceTest {
 
     @Test
     public void emptyUserTest() {
+        // arrange
+        Mockito.when(userService.findByUsername("testUser1")).thenReturn(Optional.of(null)); // return empty user, cause user dont exist
+
         ResponseEntity<?> response = registrationController.registration(emptyUser);
         AppErorr error = (AppErorr) response.getBody();
 

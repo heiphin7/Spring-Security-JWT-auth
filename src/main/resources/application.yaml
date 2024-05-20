@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/springsecurity
+    url: jdbc:postgresql://keycloak-database:5432/springsecurity
     username: postgres
     password: admin
   jpa:

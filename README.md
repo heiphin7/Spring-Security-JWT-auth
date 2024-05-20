@@ -73,3 +73,24 @@ GET
 Все данные endpoint-ы можете просмотреть в swagger ui при локальном запуске: localhost:{port}/swagger-ui/index.html
 
 
+# How to start:
+
+Перед запуском вы должны настроить базу данных в application.yaml & dokcer-compose.yml
+Таблицы создавать не нужно, Hibernate создаст сам, главное наличие самой базы данных
+Вы можете запустить проект, используя ваше IDE, ну или используя командную строку:
+   
+    ```bash
+    git clone https://github.com/heiphin7/Keycloak-Jwt-Spring_Security-auth.git
+    ```
+
+Билд проекта через docker-контейнер (в корневой директории)
+
+  ```bash
+  docker build -t keycloak-jwt . 
+  ```
+
+Запускаем docker compose
+
+ ``` bash
+ docker compose up
+ ```
